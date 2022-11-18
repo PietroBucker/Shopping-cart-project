@@ -30,4 +30,8 @@ describe('Teste a função fetchProductsList', () => {
   it('chamar a função fetchProductsListsem argumento, retorna um erro com a mensagem: "Termo de busca não informado"', () => {
     expect(fetchProductsList()).rejects.toThrow(new Error('Termo de busca não informado'));
   });
+
+  it('chamar a função fetchProductsListsem argumento diferente de "computador", retorna um erro', () => {
+    expect(fetchProductsList('comutador')).rejects.toThrow(new Error('Algum erro ocorreu, recarregue a página e tente novamente'));
+  });
   });
