@@ -30,7 +30,6 @@ export const saveCartPrice = (price) => {
   const newCartPrices = [...cartPrices, price];
   localStorage.setItem('cartPrice', JSON.stringify(newCartPrices));
 };
-
 /**
  * Função que remove um product do carrinho.
  * @param {string} id - ID do product a ser removido.

@@ -1,7 +1,7 @@
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProductsList, fetchProduct } from './helpers/fetchFunctions';
 import { createProductElement, createCartProductElement } from './helpers/shopFunctions';
-import { getSavedCartIDs, saveCartID } from './helpers/cartFunctions';
+import { getSavedCartIDs } from './helpers/cartFunctions';
 import './style.css';
 
 const criaProdutos = document.querySelector('.products');
