@@ -6,7 +6,8 @@ import './style.css';
 
 const criaProdutos = document.querySelector('.products');
 const sectionForLoad = document.querySelector('.container');
-const cartProcts = document.querySelector('.cart__products')
+const cartProcts = document.querySelector('.cart__products');
+const total = document.querySelector('.total-price');
 const load = document.createElement('span');
 document.querySelector('.cep-button').addEventListener('click', searchCep);
 
@@ -35,10 +36,9 @@ const criaElementosCart = async (ids) => {
   });
 };
 
-
-
 window.onload = () => {
   criaLoad('carregando...', 'loading');
   criaElementos('computador');
   criaElementosCart(getSavedCartIDs());
+  total.textContent = localStorage.getItem('total');
 };

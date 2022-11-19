@@ -1,5 +1,9 @@
-import { removeCartID, saveCartID } from './cartFunctions';
+import { removeCartID, saveCartID,
+  saveCartPrice, removeCartPrice, getSavedCartPrice } from './cartFunctions';
+import { fetchProduct } from './fetchFunctions';
 
+const cartProcts = document.querySelector('.cart__products');
+const total = document.querySelector('.total-price');
 // Esses comentários que estão antes de cada uma das funções são chamados de JSdoc,
 // experimente passar o mouse sobre o nome das funções e verá que elas possuem descrições!
 
@@ -17,6 +21,12 @@ const createProductImageElement = (imageSource) => {
   return img;
 };
 
+const sumTotal = () => {
+  const getPrice = getSavedCartPrice();
+  const result = getPrice.reduce((acc, curr) => acc + curr, 0);
+  total.textContent = result;
+  localStorage.setItem('total', result);
+};
 /**
  * Função responsável por criar e retornar qualquer elemento.
  * @param {string} element - Nome do elemento a ser criado.
@@ -45,9 +55,11 @@ export const getIdFromProduct = (product) => (
  * @param {Element} li - Elemento do produto a ser removido do carrinho.
  * @param {string} id - ID do produto a ser removido do carrinho.
  */
-const removeCartProduct = (li, id) => {
+const removeCartProduct = (li, id, price) => {
   li.remove();
   removeCartID(id);
+  removeCartPrice(price);
+  sumTotal();
 };
 
 /**
@@ -87,8 +99,16 @@ export const createCartProductElement = ({ id, title, price, pictures }) => {
   );
   li.appendChild(removeButton);
 
-  li.addEventListener('click', () => removeCartProduct(li, id));
+  li.addEventListener('click', () => removeCartProduct(li, id, price));
   return li;
+};
+
+const addToCart = async (ID) => {
+  saveCartID(ID);
+  const obj = await fetchProduct(ID);
+  cartProcts.appendChild(createCartProductElement(obj));
+  saveCartPrice(obj.price);
+  sumTotal();
 };
 
 /**
@@ -121,7 +141,7 @@ export const createProductElement = ({ id, title, thumbnail, price }) => {
     'product__add',
     'Adicionar ao carrinho!',
   );
-  cartButton.addEventListener('click', () => saveCartID(id));
+  cartButton.addEventListener('click', () => addToCart(id));
   section.appendChild(cartButton);
 
   return section;
