@@ -1,8 +1,9 @@
 {
-  "name": "sd-0x-project-shopping-cart",
+  "name": "sd-027-a-project-shopping-cart",
   "version": "1.0.0",
   "main": "script.js",
   "scripts": {
+    "build": "vite build",
     "start": "vite",
     "dev": "vite --open",
     "test": "jest --watchAll",
