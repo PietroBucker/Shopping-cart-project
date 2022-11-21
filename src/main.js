@@ -8,8 +8,11 @@ const criaProdutos = document.querySelector('.products');
 const sectionForLoad = document.querySelector('.container');
 const cartProcts = document.querySelector('.cart__products');
 const total = document.querySelector('.total-price');
+const cep = document.querySelector('.cep-input');
 const load = document.createElement('span');
-document.querySelector('.cep-button').addEventListener('click', searchCep);
+
+document.querySelector('.cep-button')
+  .addEventListener('click', () => searchCep(cep.value));
 
 const criaLoad = (param, classe) => {
   load.classList = classe;
